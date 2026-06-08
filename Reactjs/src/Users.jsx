@@ -3,7 +3,13 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 export default function Users() {
   const [users, setUsers] = useState([]);
-  const url = import.meta.env.VITE_API_URL + "/users";
+  const [user, setUser] = useState();
+   const url = import.meta.env.VITE_API_URL + "/users";
+  const handleRegister = async () => {
+    const res = await axios.post(`${url}/register`, user);
+    fetchUsers()
+  };
+ 
   const fetchUsers = async () => {
     try {
       const res = await axios.get(`${url}/get`);
@@ -12,17 +18,53 @@ export default function Users() {
       console.log(err);
     }
   };
+
+  const deleteUser = async (userId) => {
+    const res = await axios.delete(`${url}/delete/${userId}`);
+    fetchUsers();
+  };
+
   useEffect(() => {
     fetchUsers();
   }, []);
   return (
     <div>
       <h3>Users</h3>
+
+      <p>
+        <input
+          type="text"
+          onChange={(e) => setUser({ ...user, name: e.target.value })}
+          placeholder="Name"
+        />
+
+        <input
+          type="text"
+          onChange={(e) => setUser({ ...user, email: e.target.value })}
+          placeholder="Email"
+        />
+
+        <input
+          type="password"
+          onChange={(e) => setUser({ ...user, password: e.target.value })}
+          placeholder="Password"
+        />
+
+         <input
+          type="text"
+          onChange={(e) => setUser({ ...user, role: e.target.value })}
+          placeholder="Role"
+        />
+
+        <button onClick={handleRegister}>Add</button>
+      </p>
+
       <ol>
         {users &&
           users.map((user) => (
             <li key={user._id}>
-              {user.name}-{user.email}-{user.role}
+              {user.name}-{user.email}-{user.role}-
+              <button onClick={() => deleteUser(user._id)}>Delete</button>
             </li>
           ))}
       </ol>
