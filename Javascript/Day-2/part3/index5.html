@@ -1,0 +1,72 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+    <style>
+.container {
+display: flex;
+flex-wrap: wrap;
+}
+
+
+@media only screen and (max-width: 600px) {
+/* For phones: */
+h1 {
+    color: red;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: larger;
+}
+.box {
+color: green;
+width: 100%;
+}
+}
+@media only screen and (min-width: 600px) {
+/* For tablets: */
+h1 {
+    color: blue;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: medium;
+}
+.box {
+color: blue;
+width: 50%;
+}
+}
+@media only screen and (min-width: 768px) {
+/* For desktop: */
+h1 {
+    color: orange;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: small;
+}
+.box {
+color: red;
+width: 25%;
+}
+}
+@media only screen and (orientation: landscape) {
+.box {
+background-color: lightblue;
+}
+}
+@media only screen and (orientation: portrait) {
+.box {
+background-color: lightgreen;
+}
+}
+</style>
+<body>
+<div class="container">
+<div class="box">Hello</div>
+<div class="box">Hello</div>
+<div class="box">Hello</div>
+<div class="box">Hello</div>
+<div><h1>hi im jayanth</h1>  </div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,19 @@
+*{
+    margin:0px
+}
+.header {
+  background-color: orange;
+  color: black;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.header li {
+  display: inline-block;
+  margin:1px
+}
+
+.footer{
+    background-color: gray;
+}

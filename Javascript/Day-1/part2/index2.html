@@ -1,0 +1,127 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>details{
+        background-color: aquamarine;
+    }
+    </style>
+    <script>
+        function f1(){
+            alert("Hello world")
+        }
+    </script>
+  </head>
+  <body>
+    <p>
+      <strong>Lorem ipsum </strong>dolor <em>sit amet</em> consectetur
+      <mark>elit. Libero</mark> voluptatibus iste optio <u>natus ratione</u>,
+      commodi veniam praesentium aspernatur neque nostrum!
+    </p>
+    <p>
+      Lorem ipsum dolor sit
+      <abbr title="Hyper text markup language">HTML</abbr> amet consectetur
+      adipisicing elit. Earum nemo perspiciatis hic numquam, cupiditate a ullam
+      quia consequuntur illum praesentium.
+    </p>
+    <!-- ctrl+/-> comment html tags -->
+    <p>
+      x<sup>2</sup>+y<sup>2</sup>=10
+      <br />
+      H<sub>2</sub>O is water
+    </p>
+    <pre>
+        Dear Sir, 
+        could u please grant me leave tmrw?
+        thanks,
+        john
+     </pre>
+      <hr />
+    <p>
+      <meter value="0.9"></meter>
+    </p>
+    <p>
+      <progress value="100" max="500"></progress>
+    </p>
+    <fieldset>
+      <legend>Personal Information</legend>
+
+      <form action="server.jsp" method="GET">
+        <p>
+          <input
+            type="text"
+            name="name"
+            autofocus
+            maxlength="5"
+            required
+            placeholder="name"
+          />
+          <!-- value="john@gmail.com"readonly disabled -->
+        </p>
+        <p>
+          <input type="number" min="0" max="100" placeholder="age" />
+        </p>
+        <p>
+          <input type="date" />
+        </p>
+        <p><input type="file" /></p>
+        <p><input type="color" /></p>
+
+        <p>
+          <button>Submit</button>
+        </p>
+      </form>
+    </fieldset>
+    <fieldset>
+      <legend>Educational Information</legend>
+      <form>
+        <p>
+          Highest qualification:
+          <input type="radio" /> Post Graduate <input type="radio" /> Graduate
+          <input type="radio" /> HSC
+        </p>
+        <p>
+          Skills:
+          <input type="checkbox" /> Java <input type="checkbox" /> Python
+          <input type="checkbox" /> .net
+        </p>
+        <p>
+          Certification:
+          <select>
+            <option>Oracle cerification</option>
+            <option>AWS cerification</option>
+            <option>Java cerification</option>
+          </select>
+        </p>
+        <p>
+          <textarea
+            rows="4"
+            cols="30"
+            placeholder="Any other qualifications"
+          ></textarea>
+          <p>
+            Prefered location:
+            <input list="location"> 
+            <datalist id="location">
+                <option> Hyerdbad</option>
+                <option> Delhi</option>
+                <option> Mumbai</option>
+            </datalist>
+          </p>
+        </p>
+      </form>
+    </fieldset>
+    <fieldset>
+        <details> 
+            <summary>Chapter 1</summary>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil sit perferendis et dolor cum pariatur iusto temporibus debitis, omnis vero consequuntur praesentium delectus eveniet ut expedita harum ad exercitationem maxime nostrum iure? Autem nesciunt maiores praesentium consequuntur rerum voluptatibus nihil veritatis, sed inventore repudiandae id molestiae, quas iusto earum vero!</p>
+        </details>
+        <details> 
+            <summary>Chapter 2</summary>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil sit perferendis et dolor cum pariatur iusto temporibus debitis, omnis vero consequuntur praesentium delectus eveniet ut expedita harum ad exercitationem maxime nostrum iure? Autem nesciunt maiores praesentium consequuntur rerum voluptatibus nihil veritatis, sed inventore repudiandae id molestiae, quas iusto earum vero!</p>
+        </details>
+    </fieldset>
+    <button onclick="f1()">Button</button>
+  </body>
+</html>

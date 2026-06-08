@@ -1,0 +1,378 @@
+// import React from "react";
+// import { createBrowserRouter, RouterProvider } from "react-router-dom";
+// import Cart from "./Cart";
+// import Home from "./Home";
+// import Orders from "./Orders";
+// import Login from "./Login";
+// import Products from "./Products";
+// import Register from "./Register";
+// import RootLayout from "./RootLayout";
+// import Order from "./Order";
+// import AdminLayout from "./AdminLayout";
+// import Users from "./Users";
+// export default function App() {
+//   const router = createBrowserRouter([
+//     {
+//       path: "/",
+//       element: <RootLayout />,
+//       children: [
+//         { index: true, element: <Home /> },
+//         { path: "cart", element: <Cart /> },
+//         { path: "orders", element: <Orders /> },
+//         { path: "login", element: <Login /> },
+//         { path: "register", element: <Register /> },
+//         {
+//           path: "admin",
+//           element: <AdminLayout />,
+//           children: [
+//             { index: true, element: <Users /> },
+//             { path: "products", element: <Products /> },
+//             {path:"orders",element:<Order/>}
+//           ],
+//         },
+//       ],
+//     },
+//   ]);
+//   return <RouterProvider router={router} />;
+// }
+
+// import React, { useState } from "react";
+// import axios from "axios";
+// export default function App() {
+//   const [item, setItem] = useState({});
+//   const [items, setItems] = useState([]);
+//   const handleAdd = () => {
+//     setItems([...items, item]);
+//   };
+//   const orderValue = items.reduce(
+//     (sum, item) => sum + item.price * item.quantity,
+//     0
+//   );
+//   const handleNext = async () => {
+//     const obj = {
+//       items,
+//       orderValue,
+//     };
+//     await axios.post("http://localhost:5001/orders", obj);
+//     setItem({})
+//     setItems([])
+//   };
+//   return (
+//     <div>
+//       <h2>Supermarket Billing Counter</h2>
+//       <p>
+//         <select onChange={(e) => setItem({ ...item, name: e.target.value })}>
+//           <option>-- Select Product --</option>
+//           <option>Product 1</option>
+//           <option>Product 2</option>
+//           <option>Product 3</option>
+//         </select>
+//         <input
+//           type="number"
+//           onChange={(e) => setItem({ ...item, price: e.target.value })}
+//           placeholder="Price"
+//         />
+//         <input
+//           type="number"
+//           onChange={(e) => setItem({ ...item, quantity: e.target.value })}
+//           placeholder="Quantity"
+//         />
+//         <button onClick={handleAdd}>Add</button>
+//       </p>
+//       <p>
+//         <ol>
+//           {items &&
+//             items.map((item) => (
+//               <li>
+//                 {item.name}-{item.price}-{item.quantity}-
+//                 {item.price * item.quantity}
+//               </li>
+//             ))}
+//         </ol>
+//       </p>
+//       <p>Order Value:{orderValue}</p>
+//       <p>
+//         <button onClick={handleNext}>Next</button>
+//       </p>
+//     </div>
+//   );
+// }
+
+import React from "react";
+import { useEffect, useState } from "react";
+import axios from "axios"
+
+// export default function App() {
+//   const [user, setUser] = useState({});
+//   const API_URL = "http://localhost:5000/users";
+//   const handleSubmit = async () => {
+//     await axios.post(API_URL, user);
+//   };
+//   return (
+//     <div>
+//       <h3>Registration Form</h3>
+//       <p>
+//         <input
+//           type="text"
+//           onChange={(e) => setUser({ ...user, name: e.target.value })}
+//           placeholder="Name"
+//         />
+//       </p>
+//       <p>
+//         <input
+//           type="text"
+//           onChange={(e) => setUser({ ...user, email: e.target.value })}
+//           placeholder="Email"
+//         />
+//       </p>
+//       <p>
+//         <input
+//           type="password"
+//           onChange={(e) => setUser({ ...user, password: e.target.value })}
+//           placeholder="Password"
+//         />
+//       </p>
+//       <button onClick={handleSubmit}>Submit</button>
+//     </div>
+//   );
+// }
+
+// export default function App() {
+//   const [products, setProducts] = useState([]);
+//   const [product,setProduct] = useState({})
+//   const API_URL = "http://localhost:5000/products";
+//   const fetchProducts = async () => {
+//     const res = await axios.get(API_URL);
+//     setProducts(res.data);
+//   };
+//   useEffect(() => {
+//     fetchProducts();
+//   }, []);
+//   const addProduct = async () => {
+//    const res = await axios.post(API_URL,product)
+//    fetchProducts()
+//   }
+
+//     const deleteProduct = async (id) => {
+//     const res = await axios.delete(API_URL+"/"+id)
+//     fetchProducts()
+//   }
+
+//   return (
+//     <div>
+//       <p>
+//         <input type="text"
+//         onChange={(e)=>setProduct({...product,name:e.target.value})}
+//         placeholder="Name" />
+//         <input type="number"
+//         onChange={(e)=>setProduct({...product,price:e.target.value})}
+//         placeholder="Price" />
+//         <button onClick={addProduct}>Add</button>
+//       </p>
+//       {products &&
+//         products.map((product) => <li key={product.id}>{product.name}-{product.price}-<button onClick={()=>deleteProduct(product._id)}>Delete</button></li>)}
+//     </div>
+//   );
+// }
+
+export default function App(){
+ const [notes, setNotes] = useState([]);
+  const [text, setText] = useState("");
+  const fetchNotes = async () => {
+    const res = await axios.get("http://localhost:5000/notes");
+    setNotes(res.data);
+  };
+  useEffect(() => {
+    fetchNotes();
+  }, []);
+  const addNote = async () => {
+    await axios.post("http://localhost:5000/notes", { text });
+    setText("");
+    fetchNotes();
+  };
+  const deleteNote = async (id) => {
+    await axios.delete(`http://localhost:5000/notes/${id}`);
+    fetchNotes();
+  };
+  return (
+    <div style={{ padding: "20px" }}>
+      <h2>Notes App</h2>
+      <input
+        type="text"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        placeholder="Enter your note"
+      />
+      <button onClick={addNote}>Add</button>
+      <ol>
+        {notes.map((note) => (
+          <li key={note._id}>
+            {note.text}{" "}
+            <button onClick={() => deleteNote(note._id)}>Delete</button>
+          </li>
+        ))}
+      </ol>
+    </div>
+  );
+}
+
+// export default function App() {
+//   const [products, setProducts] = useState([]);
+//   const API_URL = "http://localhost:5000/products";
+//   const fetchProducts = async () => {
+//     const res = await axios.get(API_URL);
+//     setProducts(res.data);
+//   };
+//   useEffect(() => {
+//     fetchProducts();
+//   }, []);
+//   return (
+//     <div>
+//       {products &&
+//         products.map((product) => <li key={product.id}>{product.name}</li>)}
+//     </div>
+//   );
+// }
+
+// export default function App() {
+//   const [user, setUser] = useState({});
+//   const [message, setMessage] = useState();
+
+//   const users = [
+//     {id:1, email:"john@gmail.com", password:"1234"},
+//     {id:2, email:"amy@gmail.com", password:"4567"},
+//   ]
+//   const handleLogin=()=>{
+//     const found = users.find(
+//         (element)=>
+//             element.email===user.email && element.password === user.password,
+//     );
+//     if(found) {
+//         setMessage("welcome");
+//     }
+//     else {
+//       setMessage("Access Denied");
+//     }
+//   }
+//   return (
+//     <div>
+//       <h2>Login Form</h2>
+//       {message}
+//       <p>
+//         <input type="text"
+//         onChange={(e)=>setUser({...user, email:e.target.value})}
+//         placeholder="Email" />
+//       </p>
+//       <p>
+//         <input type="password"
+//         onChange={(e)=>setUser({...user, password:e.target.value})}
+//         placeholder="Password" />
+//       </p>
+//       <button onClick={handleLogin}>Login</button>
+//     </div>
+//   );
+// }
+
+// export default function () {
+//   const [score, setScore] = useState(0);
+//   return (
+//     <div>
+//       {score}
+//       <div>
+//         <button onClick={() => setScore(score + 1)}>Update score</button>
+//       </div>
+//     </div>
+//   );
+// }
+// export default function App(){
+//     const greet=(name) => {alert("hello "+name) }
+//     return(
+//         <div>
+//             <button onClick={()=>greet("Cathy")}>Click</button>
+//         </div>
+//     )
+// }
+// export default function App(){
+//     const greet=() => {alert("hello") }
+//     return(
+//         <div>
+//             <button onClick={greet}>Click</button>
+//         </div>
+//     )
+// }
+// function Pass() {
+//   return <div>Pass</div>;
+// }
+
+// function Fail() {
+//   return <div>Fail</div>;
+// }
+
+// export default function App() {
+//   let score = 80;
+//   return <div>{score>40 && <Pass/>}</div>
+//   // return <div>{score > 40 ? <Pass /> : <Fail />}</div>;
+// }
+
+// export default function App() {
+//   const products = [
+//     { id: 1, name: "Laptop", price: 100 },
+//     { id: 2, name: "keyboad", price: 20 },
+//     { id: 3, name: "Desktop", price: 50 },
+//   ];
+//   return (
+//     <ol>
+//       {products.map((product) => (
+//         <li key={product.id}>
+//           {product.name}-{product.price}
+//         </li>
+//       ))}
+//     </ol>
+//   );
+// }
+
+// function Loop({pr}){
+//     return (pr.map((p)=>(<li>{p}</li>)))
+// }
+
+// export default function App() {
+//   const products = ["Laptop", "Desktop", "Keyboard"];
+//   return (
+//     <ol>
+//       <Loop pr={products} />
+//     </ol>
+//   );
+// }
+
+// export default function App() {
+//   const products = ["Laptop", "Desktop", "Keyboard"];
+//   return (
+//     <ol>
+//       {products.map((product) => (
+//         <li>{product}</li>
+//       ))}
+//     </ol>
+//   );
+// }
+
+// function Sum({a,b=0}){ //default props
+//     return a+b
+// }
+// function Sum(props){
+//     return props.a+props.b
+// }
+
+// export default function App(){
+//     return(
+//         <div><Sum a={4} b={5}/> </div>
+//     )
+// }
+
+// export default function App(){
+//     let name="John"
+//     let a=10
+//     let b=20
+//     return(
+//         <div> hi {name}, {a+b} </div>
+//     )
+// }
