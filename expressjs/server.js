@@ -1,3 +1,15 @@
+import app from "./app.js";
+import dotenv from "dotenv"
+import dbConnect from "./config/db.js";
+import seedAdmin from "./config/seedAdmin.js";
+dotenv.config()
+dbConnect();
+seedAdmin();
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
 // import express from "express"
 // import cors from "cors"
 // import mongoose from "mongoose"
@@ -95,40 +107,40 @@
 //     res.json(product)
 // })
 
-import express from "express"
-import cors from "cors"
-import mongoose from "mongoose"
-const app = express()
-app.use(cors()) //frontend access server
-app.use(express.json())
+// import express from "express"
+// import cors from "cors"
+// import mongoose from "mongoose"
+// const app = express()
+// app.use(cors()) //frontend access server
+// app.use(express.json())
 
-async function startServer(){
-    mongoose.connect("mongodb://localhost:27017/notesDB").then(()=>{
-        app.listen(5000, ()=> console.log("server started"));
-    });
-}
-startServer()
+// async function startServer(){
+//     mongoose.connect("mongodb://localhost:27017/notesDB").then(()=>{
+//         app.listen(5000, ()=> console.log("server started"));
+//     });
+// }
+// startServer()
 
-const noteSchema = new mongoose.Schema({
-    text: {type: String},
-})
-const noteModel= mongoose.model("notes", noteSchema)
+// const noteSchema = new mongoose.Schema({
+//     text: {type: String},
+// })
+// const noteModel= mongoose.model("notes", noteSchema)
 
-app.get("/notes", async(req,res) =>{
-    const notes = await noteModel.find();
-    res.json(notes)
-});
+// app.get("/notes", async(req,res) =>{
+//     const notes = await noteModel.find();
+//     res.json(notes)
+// });
 
-app.post("/notes", async (req,res)=>{
-    await noteModel.create(req.body)
-    res.json({message: "Note added"})
-})
+// app.post("/notes", async (req,res)=>{
+//     await noteModel.create(req.body)
+//     res.json({message: "Note added"})
+// })
 
-app.delete("/notes/:id", async (req, res) => {
-  const { id } = req.params;
-  await noteModel.findByIdAndDelete(id);
-  res.json({ message: "Note deleted" });
-});
+// app.delete("/notes/:id", async (req, res) => {
+//   const { id } = req.params;
+//   await noteModel.findByIdAndDelete(id);
+//   res.json({ message: "Note deleted" });
+// });
 
 
 

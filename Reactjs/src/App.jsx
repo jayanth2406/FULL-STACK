@@ -1,3 +1,19 @@
+import React, { useState } from "react";
+import { createContext } from "react";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./router.jsx";
+export const AppContext = createContext();
+export default function App() {
+  const [user, setUser] = useState({});
+  const [cart, setCart] = useState([]);
+  return (
+    <AppContext.Provider value={{ user, setUser, cart, setCart }}>
+      <RouterProvider router={router} />
+    </AppContext.Provider>
+  );
+}
+
+
 // import React from "react";
 // import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // import Cart from "./Cart";
@@ -98,9 +114,9 @@
 //   );
 // }
 
-import React from "react";
-import { useEffect, useState } from "react";
-import axios from "axios"
+// import React from "react";
+// import { useEffect, useState } from "react";
+// import axios from "axios"
 
 // export default function App() {
 //   const [user, setUser] = useState({});
@@ -175,46 +191,46 @@ import axios from "axios"
 //   );
 // }
 
-export default function App(){
- const [notes, setNotes] = useState([]);
-  const [text, setText] = useState("");
-  const fetchNotes = async () => {
-    const res = await axios.get("http://localhost:5000/notes");
-    setNotes(res.data);
-  };
-  useEffect(() => {
-    fetchNotes();
-  }, []);
-  const addNote = async () => {
-    await axios.post("http://localhost:5000/notes", { text });
-    setText("");
-    fetchNotes();
-  };
-  const deleteNote = async (id) => {
-    await axios.delete(`http://localhost:5000/notes/${id}`);
-    fetchNotes();
-  };
-  return (
-    <div style={{ padding: "20px" }}>
-      <h2>Notes App</h2>
-      <input
-        type="text"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        placeholder="Enter your note"
-      />
-      <button onClick={addNote}>Add</button>
-      <ol>
-        {notes.map((note) => (
-          <li key={note._id}>
-            {note.text}{" "}
-            <button onClick={() => deleteNote(note._id)}>Delete</button>
-          </li>
-        ))}
-      </ol>
-    </div>
-  );
-}
+// export default function App(){
+//  const [notes, setNotes] = useState([]);
+//   const [text, setText] = useState("");
+//   const fetchNotes = async () => {
+//     const res = await axios.get("http://localhost:5000/notes");
+//     setNotes(res.data);
+//   };
+//   useEffect(() => {
+//     fetchNotes();
+//   }, []);
+//   const addNote = async () => {
+//     await axios.post("http://localhost:5000/notes", { text });
+//     setText("");
+//     fetchNotes();
+//   };
+//   const deleteNote = async (id) => {
+//     await axios.delete(`http://localhost:5000/notes/${id}`);
+//     fetchNotes();
+//   };
+//   return (
+//     <div style={{ padding: "20px" }}>
+//       <h2>Notes App</h2>
+//       <input
+//         type="text"
+//         value={text}
+//         onChange={(e) => setText(e.target.value)}
+//         placeholder="Enter your note"
+//       />
+//       <button onClick={addNote}>Add</button>
+//       <ol>
+//         {notes.map((note) => (
+//           <li key={note._id}>
+//             {note.text}{" "}
+//             <button onClick={() => deleteNote(note._id)}>Delete</button>
+//           </li>
+//         ))}
+//       </ol>
+//     </div>
+//   );
+// }
 
 // export default function App() {
 //   const [products, setProducts] = useState([]);
