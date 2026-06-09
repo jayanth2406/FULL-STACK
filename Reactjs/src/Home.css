@@ -1,0 +1,10 @@
+.row{
+    display: flex;
+    justify-content: center;
+}
+
+.row div{
+    margin:5px;
+    padding: 3px;
+    border: 2px solid grey;
+}
