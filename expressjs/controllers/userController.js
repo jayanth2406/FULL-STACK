@@ -2,7 +2,7 @@ import * as userService from "../services/userService.js"
 
 const updateUser = async (req, res) => {
     try {
-        const { userId } = await req.params
+        const { userId } = req.params
         const user = await userService.updateUser(userId, req.body)
         res.status(200).json({
             success: true,
@@ -18,15 +18,15 @@ const updateUser = async (req, res) => {
 
 const getUser = async (req, res) => {
     try {
-        const { userId } = await req.params
+        const { userId } = req.params
         const user = await userService.getUser(userId)
         res.status(200).json({
             success: true,
             user: user
         })
     }
-    catch (err) {
-        console.log(error)
+    catch (error) {
+        console.error(error)
         res.status(500).json({
             success: false,
             message: error.message
@@ -84,6 +84,7 @@ const deleteUser = async (req, res) => {
 
 const createUser = async (req, res) => {
     try {
+        console.log(req.body)
         const user = await userService.createUser(req.body);
         res.status(201).json({
             success: true,

@@ -1,14 +1,15 @@
 import app from "./app.js";
-import dotenv from "dotenv"
+
 import dbConnect from "./config/db.js";
 import seedAdmin from "./config/seedAdmin.js";
-dotenv.config()
+
 dbConnect();
 seedAdmin();
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
 
 // import express from "express"
 // import cors from "cors"

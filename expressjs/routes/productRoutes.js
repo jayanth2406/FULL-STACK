@@ -1,12 +1,10 @@
 import express from "express"
-import { authenticate,authorize } from "../middleware/authMiddleware.js";
-import * as userController from "../controllers/userController.js"
-const router = express.Router();
-router.get("/get", authenticate, authorize("admin"), userController.getUsers);
-router.get("/getUser/:userId",userController.getUser)
-router.post("/login", userController.authUser);
-router.post("/register", userController.createUser);
-router.delete("/delete/:userId",userController.deleteUser)
-router.patch("/updateUser/:userId",userController.updateUser)
+import * as productController from "../controllers/productController.js"
+const router = express.Router()
+router.get("/get",productController.getProducts)
+router.get("/getProduct/:productId",productController.getProduct)
+router.post("/create",productController.createProduct)
+router.delete("/delete/:productId",productController.deleteProduct)
+router.patch("/update/:productId",productController.updateProduct)
 
 export default router
